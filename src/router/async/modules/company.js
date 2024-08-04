@@ -9,27 +9,10 @@ const companyRouter = {
   },
   children: [
     {
-      path: 'list', name: 'companyList', component: () => import('@/views/company/list'),
+      path: '', name: 'companyBaseData', component: () => import('@/views/company/index'),
       meta: {
-        title: '公司列表',
-        roles: ['company']
+        title: '企业基本资料'
       }
-    },
-    {
-      path: 'create', name: 'companyCreate', component: () => import('@/views/company/create'),
-      meta: {
-        title: '新建公司',
-        roles: ['company']
-      }
-    },
-    {
-      path: 'update/:id', name: 'companyUpdate', component: () => import('@/views/company/update'),
-      meta: {
-        title: '公司编辑',
-        roles: ['company'],
-        activeMenu: '/company/list'
-      },
-      hidden: true
     }
   ]
 }

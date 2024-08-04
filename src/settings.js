@@ -1,7 +1,7 @@
 
-const adminPort = 10001
-const servePort = 10000
-const title = '基础模版'
+const servePort = 20370
+const adminPort = 20371
+const title = '标书制作'
 const isDevMode = process.env.NODE_ENV === 'development'
 module.exports = {
   port: adminPort, // 项目端口
