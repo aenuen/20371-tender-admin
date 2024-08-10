@@ -4,12 +4,12 @@ export const fields = {
   legal: '法人代表',
   type: '企业类型',
   industry: '所属行业',
-  number: '职工人数',
-  income: '年度销售收入',
-  study: '研发人员数',
+  workerNumber: '职工人数',
+  researcherNumber: '研发人员数',
+  yearSaleVolume: '年度销售收入',
   email: '联系邮箱',
   mobile: '联系电话',
-  liaison: '联系人',
+  contacts: '联系人',
   address: '联系地址'
 }
 

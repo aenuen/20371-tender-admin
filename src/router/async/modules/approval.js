@@ -18,14 +18,14 @@ const approvalRouter = {
     {
       path: 'create', name: 'approvalCreate', component: () => import('@/views/approval/create'),
       meta: {
-        title: '新建立项',
+        title: '新建项目',
         roles: ['approval']
       }
     },
     {
       path: 'update/:id', name: 'approvalUpdate', component: () => import('@/views/approval/update'),
       meta: {
-        title: '立项编辑',
+        title: '项目编辑',
         roles: ['approval'],
         activeMenu: '/approval/list'
       },
