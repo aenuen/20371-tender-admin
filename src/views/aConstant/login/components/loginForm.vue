@@ -1,4 +1,3 @@
-<!--suppress JSUnresolvedFunction, CssUnknownProperty -->
 <template>
   <div>
     <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form" autocomplete="off" label-position="left">
@@ -40,7 +39,7 @@ export default {
   data() {
     return {
       loginRules: {
-        username: [{ validator: validateUsername }],
+        username: [{ validator: (rule, value, callback) => validateUsername(rule, value, callback, 5, 20) }],
         password: [
           {
             validator: (rule, value, callback) => validateRequire(rule, value, callback, '密码', 6, 20)
