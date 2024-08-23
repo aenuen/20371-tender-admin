@@ -22,14 +22,14 @@
         <el-col :span="8">
           <el-form-item prop="type" :label="fields.type" :label-width="labelWidth">
             <el-select v-model="postForm.type" class="filter-ele" :placeholder="fields.type" clearable style="width: 100%">
-              <el-option v-for="(item, key) in companyTypeAry" :key="key" :value="item" :label="item" />
+              <el-option v-for="(item, key) in companyTypeAry" :key="key" :value="item.value" :label="item.label" />
             </el-select>
           </el-form-item>
         </el-col>
         <el-col :span="8">
           <el-form-item prop="industry" :label="fields.industry" :label-width="labelWidth">
             <el-select v-model="postForm.industry" class="filter-ele" :placeholder="fields.industry" clearable style="width: 100%">
-              <el-option v-for="(item, key) in companyIndustryAry" :key="key" :value="item" :label="item" />
+              <el-option v-for="(item, key) in companyIndustryAry" :key="key" :value="item.value" :label="item.label" />
             </el-select>
           </el-form-item>
         </el-col>
@@ -77,7 +77,7 @@
       </el-row>
       <el-form-item :label-width="labelWidth">
         <el-button type="primary" :loading="submitLoading" :disabled="submitLoading" @click="submitFrom">{{ submitText }}</el-button>
-        <el-button @click="geTextData">测试数据</el-button>
+        <el-button @click="geTestData">测试数据</el-button>
       </el-form-item>
     </el-form>
   </div>
@@ -111,8 +111,8 @@ export default {
       companyTypeAry,
       companyIndustryAry,
       submitText: '',
-      textData: {
-        company: '福建居乐律师事务所',
+      testData: {
+        company: '福建逸嘉科技有限公司',
         credit: '350583198306167132',
         legal: '石志辉',
         type: '国有企业',
@@ -132,23 +132,64 @@ export default {
     this.submitText = this.isUpdate ? '编辑公司' : '新增公司'
   },
   methods: {
-    geTextData() {
-      this.postForm = { ...this.postForm, ...this.textData }
+    // 获取详情资料
+    getDetail() {
+      companyApi
+        .detail({ id: this.updateId })
+        .then(({ data, code, msg }) => {
+          if (code === 200) {
+            this.postForm = { ...data }
+          } else {
+            this.$message.error(msg)
+            this.routerClose('/company/list')
+          }
+        })
+        .catch((err) => {
+          this.$message.error(err)
+          this.routerClose('/company/list')
+        })
     },
+    // 获取测试数据
+    geTestData() {
+      this.postForm = { ...this.postForm, ...this.testData }
+    },
+    // 提交新增|编辑
     submitFrom() {
       this.$refs.postForm.validate((valid, fields) => {
         this.submitLoadingOpen()
         if (valid) {
-          companyApi.create(this.postForm).then(({ code, msg }) => {
-            if (code === 200) {
-              this.submitLoadingClose()
-              this.$message.success(msg) // 新增成功
-              this.routerGo('/company/list')
-            } else {
-              this.submitLoadingClose()
-              this.$message.error(msg) // 新增失败
-            }
-          })
+          // 编辑
+          if (this.isUpdate) {
+            companyApi
+              .update({
+                ...this.postForm,
+                ...{ id: this.updateId }
+              })
+              .then(({ code, msg }) => {
+                if (code === 200) {
+                  this.submitSuccessHandle(msg, '/company/list')
+                } else {
+                  this.submitFailHandle(msg)
+                }
+              })
+              .catch((err) => {
+                this.submitErrorHandle(err)
+              })
+          } else {
+            // 新增
+            companyApi
+              .create(this.postForm)
+              .then(({ code, msg }) => {
+                if (code === 200) {
+                  this.submitSuccessHandle(msg, '/company/list')
+                } else {
+                  this.submitFailHandle(msg)
+                }
+              })
+              .catch((err) => {
+                this.submitErrorHandle(err)
+              })
+          }
         } else {
           this.validateErrHandle(fields)
         }

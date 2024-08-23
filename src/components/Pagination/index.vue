@@ -13,7 +13,7 @@ export default {
     total: { required: true, type: Number },
     page: { type: Number, default: 1 },
     limit: { type: Number, default: 20 },
-    pageSizes: { type: Array, default: () => [10, 20, 30, 50] },
+    pageSizes: { type: Array, default: () => [5, 10, 20, 30, 50] },
     layout: { type: String, default: 'total, sizes, prev, pager, next, jumper' },
     background: { type: Boolean, default: true },
     autoScroll: { type: Boolean, default: true },

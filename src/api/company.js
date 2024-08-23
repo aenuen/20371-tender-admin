@@ -7,5 +7,7 @@ export const companyApi = {
   list: params => request({ url: '/company/list?' + qs.stringify(params), method: 'get' }), // 列表
   // post
   create: data => request({ url: '/company/create', method: 'post', data }), // 新增
-  update: data => request({ url: '/company/update', method: 'post', data }) // 编辑
+  remove: data => request({ url: '/company/remove', method: 'post', data }), // 删除
+  update: data => request({ url: '/company/update', method: 'post', data }), // 编辑
+  removeBatch: data => request({ url: '/company/removeBatch', method: 'post', data }) // 批量删除
 }

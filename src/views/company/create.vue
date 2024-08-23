@@ -1,5 +1,5 @@
 <template>
-  <Detail></Detail>
+  <Detail />
 </template>
 <script>
 // api
@@ -12,10 +12,14 @@ import Detail from './components/Detail'
 // plugins
 // settings
 export default {
+  name: 'CompanyCreate',
   components: { Detail },
+  mixins: [],
   data() {
     return {}
-  }
+  },
+  created() {},
+  methods: {}
 }
 </script>
 <style lang="scss" scoped></style>
