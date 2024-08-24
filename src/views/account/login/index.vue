@@ -21,7 +21,7 @@
           </span>
         </el-form-item>
       </el-tooltip>
-      <el-button :loading="loading" type="primary" style="width: 100%; margin-bottom: 30px" @click.native.prevent="login"> 登录 </el-button>
+      <el-button :loading="submitLoading" type="primary" style="width: 100%; margin-bottom: 30px" @click.native.prevent="login"> 登录 </el-button>
     </el-form>
   </div>
 </template>
@@ -87,7 +87,7 @@ export default {
     login() {
       this.$refs.loginForm.validate((valid) => {
         if (valid) {
-          this.loading = true
+          this.submitLoadingOpen()
           const newLoginForm = {
             username: CryptoJsEncode(this.loginForm.username),
             password: CryptoJsEncode(this.loginForm.password)
@@ -95,9 +95,9 @@ export default {
           this.$store
             .dispatch('user/login', newLoginForm)
             .then(() => {
-              this.loginSubmit()
-              this.$routerGo(this.redirect || '/', this.otherQuery)
               this.loading = false
+              this.submitLoadingClose()
+              this.routerGo(this.redirect || '/', this.otherQuery)
             })
             .catch(() => {
               this.loading = false
