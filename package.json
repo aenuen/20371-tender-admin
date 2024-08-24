@@ -10,6 +10,7 @@
     "build": "vue-cli-service build",
     "new": "plop",
     "lint": "eslint --ext .js,.vue src",
+    "clean": "git config --global core.autocrlf true",
     "rm:dist": "rimraf dist",
     "rm:node": "rimraf node_modules"
   },
