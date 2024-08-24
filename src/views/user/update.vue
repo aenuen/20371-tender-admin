@@ -13,7 +13,7 @@ import Detail from './components/Detail'
 // plugins
 // settings
 export default {
-  name: 'PersonalUpdate',
+  name: 'UserUpdate',
   components: { Detail }
 }
 </script>

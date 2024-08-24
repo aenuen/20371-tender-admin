@@ -5,9 +5,9 @@
 </template>
 
 <script>
+// TODO
 export default {
   name: 'App'
 }
 </script>
-<style lang="scss">
-</style>
+<style lang="scss"></style>

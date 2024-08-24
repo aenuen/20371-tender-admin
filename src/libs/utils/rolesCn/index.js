@@ -1,4 +1,4 @@
-import { roles as rolesAry } from '@/views/aConstant/manager/modules/roles'
+import { roles as rolesAry } from '@/views/user/modules/roles'
 
 export const rolesCn = (roles) => {
   const ary = []

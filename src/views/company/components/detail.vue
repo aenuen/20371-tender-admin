@@ -75,6 +75,11 @@
           </el-form-item>
         </el-col>
       </el-row>
+      <el-row>
+        <el-col>
+          <el-form-item :label="fields.license" :label-width="labelWidth"> <Multi /> </el-form-item>
+        </el-col>
+      </el-row>
       <el-form-item :label-width="labelWidth">
         <el-button type="primary" :loading="submitLoading" :disabled="submitLoading" @click="submitFrom">{{ submitText }}</el-button>
         <el-button @click="geTestData">测试数据</el-button>
@@ -87,6 +92,7 @@
 // api
 import { companyApi } from '@/api/company'
 // components
+import Multi from '@/components/Upload/Multi.vue'
 // data
 import { fields, companyTypeAry, companyIndustryAry } from '../modules/fields'
 import { ruleDetail } from '../modules/rules'
@@ -100,7 +106,7 @@ import MethodsMixin from '@/components/Mixins/MethodsMixin'
 // settings
 export default {
   name: 'CompanyBaseData',
-  components: {},
+  components: { Multi },
   mixins: [DetailMixin, MethodsMixin],
   props: {
     isUpdate: { type: Boolean, default: false }

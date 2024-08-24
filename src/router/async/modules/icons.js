@@ -1,11 +1,13 @@
 import Layout from '@/components/Layout'
 
-const iconsRouter = {
+export const icons = {
   path: '/svgIcon',
   component: Layout,
   children: [
     {
-      path: 'index', name: 'iconsIndex', component: () => import('@/views/aConstant/icons'),
+      path: 'index',
+      name: 'iconsIndex',
+      component: () => import('@/views/icons'),
       meta: {
         title: '图标浏览',
         icon: 'icon',
@@ -15,5 +17,3 @@ const iconsRouter = {
     }
   ]
 }
-
-export default iconsRouter

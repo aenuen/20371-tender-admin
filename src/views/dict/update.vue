@@ -1,11 +1,9 @@
 <template>
-  <detail />
+  <div></div>
 </template>
-
 <script>
 // api
 // components
-import Detail from './components/Detail'
 // data
 // filter
 // function
@@ -13,9 +11,14 @@ import Detail from './components/Detail'
 // plugins
 // settings
 export default {
-  name: 'PersonalCreate',
-  components: { Detail }
+  name: 'DictUpdate',
+  components: {},
+  mixins: [],
+  data() {
+    return {}
+  },
+  created() {},
+  methods: {}
 }
 </script>
-
 <style lang="scss" scoped></style>

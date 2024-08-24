@@ -10,7 +10,8 @@ export const fields = {
   email: '联系邮箱',
   mobile: '联系电话',
   contacts: '联系人',
-  address: '联系地址'
+  address: '联系地址',
+  license: '营业执照'
 }
 
 export const companyTypeAry = [

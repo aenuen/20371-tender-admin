@@ -78,7 +78,7 @@ import Output from '@/components/Mixins/Output'
 import { defineIsUseAry, defineBooleanAry, keyLight } from 'abbott-methods/import'
 // settings
 export default {
-  name: 'ManagerList',
+  name: 'UserList',
   components: { Dialog, ListTable, Pagination },
   mixins: [ListMixin, Output],
   data() {
