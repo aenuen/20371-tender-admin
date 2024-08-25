@@ -71,6 +71,13 @@ export default {
       this.queryList.sort = (order === 'descending' ? `-` : `+`) + `${prop}`
       this.handleFilter()
     },
+    // 个人编辑
+    onUpdateAlone(id) {
+      this.updateId = id
+      this.updateAlone()
+    },
+    // 个人编辑处理
+    updateAlone() {},
     // 单个编辑成功
     updateAloneSuccess() {
       this.updateId = 0
