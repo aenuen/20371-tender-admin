@@ -1,7 +1,7 @@
 import { saveAs } from 'file-saver'
 import * as XLSX from 'xlsx'
 
-const generateArray = table => {
+const generateArray = (table) => {
   const out = []
   const rows = table.querySelectorAll('tr')
   const ranges = []
@@ -17,7 +17,7 @@ const generateArray = table => {
       if (cellValue !== '' && cellValue === +cellValue) {
         cellValue = +cellValue
       }
-      ranges.forEach(function(range) {
+      ranges.forEach(function (range) {
         if (R >= range.s.r && R <= range.e.r && outRow.length >= range.s.c && outRow.length <= range.e.c) {
           for (let i = 0; i <= range.e.c - range.s.c; ++i) {
             outRow.push(null)
@@ -54,7 +54,10 @@ const dateNumber = (v, date1904) => {
 
 const sheet_from_array_of_arrays = (data) => {
   const ws = {}
-  const range = { s: { c: 10000000, r: 10000000 }, e: { c: 0, r: 0 }}
+  const range = {
+    s: { c: 10000000, r: 10000000 },
+    e: { c: 0, r: 0 }
+  }
   for (let R = 0; R !== data.length; ++R) {
     for (let C = 0; C !== data[R].length; ++C) {
       if (range.s.r > R) {
@@ -92,7 +95,7 @@ const sheet_from_array_of_arrays = (data) => {
   return ws
 }
 
-const Workbook = function() {
+const Workbook = function () {
   if (!(this instanceof Workbook)) {
     return new Workbook()
   }
@@ -100,16 +103,16 @@ const Workbook = function() {
   this.Sheets = {}
 }
 
-const s2ab = s => {
+const s2ab = (s) => {
   const buf = new ArrayBuffer(s.length)
   const view = new Uint8Array(buf)
   for (let i = 0; i !== s.length; ++i) {
-    view[i] = s.charCodeAt(i) & 0xFF
+    view[i] = s.charCodeAt(i) & 0xff
   }
   return buf
 }
 
-export const export_table_to_excel = id => {
+export const export_table_to_excel = (id) => {
   const theTable = document.getElementById(id)
   const oo = generateArray(theTable)
   const ranges = oo[1]
@@ -120,14 +123,19 @@ export const export_table_to_excel = id => {
   ws['!merges'] = ranges
   wb.SheetNames.push(ws_name)
   wb.Sheets[ws_name] = ws
-  // noinspection JSCheckFunctionSignatures
   const wBout = XLSX.write(wb, { bookType: 'xlsx', bookSST: false, type: 'binary' })
   saveAs(new Blob([s2ab(wBout)], { type: 'application/octet-stream' }), 'test.xlsx')
 }
 
-export const export_json_to_excel = (
-  { multiHeader = [], header, data, filename, merges = [], autoWidth = true, bookType = 'xlsx' } = {}
-) => {
+export const export_json_to_excel = ({
+  multiHeader = [], //
+  header,
+  data,
+  filename,
+  merges = [],
+  autoWidth = true,
+  bookType = 'xlsx' //
+} = {}) => {
   filename = filename || 'excel-list'
   data = [...data]
   data.unshift(header)
@@ -139,20 +147,22 @@ export const export_json_to_excel = (
   const ws = sheet_from_array_of_arrays(data)
   if (merges.length > 0) {
     if (!ws['!merges']) ws['!merges'] = []
-    merges.forEach(item => {
+    merges.forEach((item) => {
       ws['!merges'].push(XLSX.utils.decode_range(item))
     })
   }
   if (autoWidth) {
-    const colWidth = data.map(row => row.map(val => {
-      if (val == null) {
-        return { 'wch': 10 }
-      } else if (val.toString().charCodeAt(0) > 255) {
-        return { 'wch': val.toString().length * 2 }
-      } else {
-        return { 'wch': val.toString().length }
-      }
-    }))
+    const colWidth = data.map((row) =>
+      row.map((val) => {
+        if (val == null) {
+          return { wch: 10 }
+        } else if (val.toString().charCodeAt(0) > 255) {
+          return { wch: val.toString().length * 2 }
+        } else {
+          return { wch: val.toString().length }
+        }
+      })
+    )
     const result = colWidth[0]
     for (let i = 1; i < colWidth.length; i++) {
       for (let j = 0; j < colWidth[i].length; j++) {
