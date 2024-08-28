@@ -46,7 +46,7 @@
 // function
 // mixin
 // plugins
-import { getToken } from '@/libs/utils/token'
+import { getToken } from '@/libs/token'
 import { fileClassify } from 'abbott-methods/import'
 // settings
 import { serveUrl } from '@/settings'

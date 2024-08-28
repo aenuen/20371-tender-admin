@@ -11,9 +11,6 @@
     "new": "plop",
     "lint": "eslint --ext .js,.vue src",
     "clean": "git config --global core.autocrlf true",
-    "plus": "git add .",
-    "commit": "git commit -m upgrade",
-    "push": "git push -u origin main",
     "rm:dist": "rimraf dist",
     "rm:node": "rimraf node_modules"
   },

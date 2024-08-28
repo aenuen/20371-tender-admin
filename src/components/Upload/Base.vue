@@ -1,24 +1,6 @@
 <template>
   <div class="upload-container">
-    <el-upload
-      :action="action"
-      :headers="headers"
-      :multiple="false"
-      :data="data"
-      :limit="fileLimit"
-      :file-list="fileList"
-      :accept="fileAccept"
-      :disabled="fileDisabled"
-      :on-preview="onPreview"
-      :before-upload="beforeUpload"
-      :on-success="onSuccess"
-      :on-error="onError"
-      :on-remove="onRemove"
-      :on-exceed="onExceed"
-      drag
-      show-file-list
-      class="image-upload"
-    >
+    <el-upload :action="action" :headers="headers" :multiple="false" :data="data" :limit="fileLimit" :file-list="fileList" :accept="fileAccept" :disabled="fileDisabled" :on-preview="onPreview" :before-upload="beforeUpload" :on-success="onSuccess" :on-error="onError" :on-remove="onRemove" :on-exceed="onExceed" drag show-file-list class="image-upload">
       <i class="el-icon-upload" />
       <div v-if="fileList.length === 0" class="el-upload__text">
         请将 <em>{{ fileText }} 拖入</em> 或 <em>点击上传</em>
@@ -29,7 +11,7 @@
 </template>
 
 <script>
-import { getToken } from '@/libs/utils/token'
+import { getToken } from '@/libs/token'
 
 export default {
   name: 'UploadDefault',
