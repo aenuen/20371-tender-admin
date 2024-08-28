@@ -1,7 +1,6 @@
 const vueSticky = {}
 let listenAction
-vueSticky.install = Vue => {
-  // noinspection JSUnresolvedFunction
+vueSticky.install = (Vue) => {
   Vue.directive('sticky', {
     inserted(el, binding) {
       const params = binding.value || {}
@@ -56,4 +55,3 @@ vueSticky.install = Vue => {
 }
 
 export default vueSticky
-
